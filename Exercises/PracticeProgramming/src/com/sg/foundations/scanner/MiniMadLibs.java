@@ -7,6 +7,9 @@ public class MiniMadLibs {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        String rand = (4+3) + "s";
+        System.out.printf(rand);
+
         System.out.println("Let's play MAD LIBS!");
 
         System.out.print("I need a noun: ");
