@@ -8,10 +8,12 @@ public class RockPaperScissors {
         int maximumRounds = 10;
         int minimumRounds = 1;
 
+        // starting game
         while(true) {
             try {
                 System.out.println("How many rounds do you want to play? (1-10)");
                 int numOfRounds = Integer.parseInt(scanner.nextLine());
+                // validation
                 if (numOfRounds < minimumRounds || numOfRounds > maximumRounds){
                     System.out.println("Incorrect rounds entered! Enter between 1-10");
                     break;
@@ -24,11 +26,9 @@ public class RockPaperScissors {
             }
         }
 
+    }
 
-
-        }
-
-    public  static void Game(int numOfRounds){
+    public static void Game(int numOfRounds){
         Scanner scanner = new Scanner(System.in);
         int userWins = 0;
         int computerWins = 0;
@@ -37,24 +37,29 @@ public class RockPaperScissors {
         String overallWinner = "";
 
         while (roundCounter < numOfRounds) {
-
+            // user input stage
             System.out.println("Input 1 (Rock), 2 (Paper) or 3 (Scissors)");
             int userInput = scanner.nextInt();
             scanner.nextLine();
 
+            // validation
             if (userInput < 1 || userInput > 3) {
                 System.out.println("Incorrect Input! Game Over");
                 break;
             }
+
+            // convert ints to strings and print user, computer moves.
             String userMove = assignMove(userInput);
 
+            //assign a random number between 1-3
             Random rand = new Random();
-            int randomMove = rand.nextInt() + 1;
+            int randomMove = rand.nextInt(3) + 1;
             String computerMove = assignMove(randomMove);
 
             System.out.println(describeMoves(userMove, "User"));
             System.out.println(describeMoves(computerMove, "Computer"));
 
+            // process who won the round
             if (userMove.equals(computerMove)) {
                 System.out.println("It's a tie!");
                 ties++;
@@ -65,13 +70,14 @@ public class RockPaperScissors {
                 System.out.println("Computer wins!");
                 computerWins++;
             }
-
+            // game update
             System.out.println("Number of ties: " + ties);
             System.out.println("Number of Computer Wins: " + computerWins);
             System.out.println("Number of User Wins: " + userWins);
+
             roundCounter++;
         }
-
+        // post game
         overallWinner = userWins == computerWins ? "NO ONE! IT'S A TIE!" : userWins > computerWins ? "USER!": "COMPUTER!";
 
         System.out.println("After " + numOfRounds + " exciting rounds, we have a winner!\n The winner is .... \n" + overallWinner);
@@ -86,11 +92,11 @@ public class RockPaperScissors {
 
     public static void restartGame(String playAgain){
         Scanner scanner = new Scanner(System.in);
-        if(playAgain.equals("Yes")){
+        if (playAgain.equals("Yes")){
             System.out.println("How many rounds do you want to play? Please input a number 1-10");
            int numOfRounds = scanner.nextInt();
             Game(numOfRounds);
-        }else if (playAgain.equals("No")){
+        } else if (playAgain.equals("No")){
             System.out.println("Thanks for playing!");
         }
     }
